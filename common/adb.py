@@ -5,7 +5,11 @@ import time
 from threading import Thread
 import imagehash
 
-ADB_PATH = os.path.join(os.path.join(os.path.dirname((os.path.dirname(__file__))), "adb"), "adb.exe")
+import platform
+platform.system()
+
+# ADB_PATH = os.path.join(os.path.join(os.path.dirname((os.path.dirname(__file__))), "adb_exe"), "adb.exe")
+ADB_PATH = os.path.join(os.path.join(os.path.dirname((os.path.dirname(__file__))), "adb_exe"), "platform-tools/adb")
 IMG_PATH = os.path.join(os.path.dirname((os.path.dirname(__file__))), "img")
 
 class ADB():
@@ -54,11 +58,11 @@ class ADB():
     
     def crop(self, target_img, loc, find_screen_nm="screenshot.png"):
         (x, y), (x1, y1) = loc
-        
+
         # lock and wait
         while self.screenshot_flag:
             time.sleep(0.1)
-        
+
         screen_shot = cv2.imread(os.path.join(IMG_PATH, find_screen_nm))[y:y1, x:x1]
         cv2.imwrite(os.path.join(IMG_PATH, 'tmp_%s.png' % target_img), screen_shot)
         time.sleep(0.1)
@@ -81,10 +85,10 @@ def get_coordinates(target_nm, find_screen_nm="screenshot.png"):
     find_screen = cv2.imread(os.path.join(IMG_PATH, find_screen_nm))
 
     result = cv2.matchTemplate(target, find_screen, cv2.TM_CCOEFF_NORMED)
-    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result) 
+    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
 
     find_height, find_width, find_channel = target.shape[::]
-    
+
     x = str(int(max_loc[0] + (find_width / 2)))
     y = str(int(max_loc[1] + (find_height / 2)))
     return x, y
