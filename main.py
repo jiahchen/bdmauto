@@ -1,7 +1,5 @@
-import os
-import subprocess
 import time
-from lib.adb import ADB, get_coordinates
+from common.adb import ADB
 
 # dv1 = ADB("127.0.0.1:62001")
 # dv1.connect()
@@ -36,7 +34,7 @@ class BlackM(object):
             self.touch_task()
             # conversavtion
             # check task done
-        #     self.adb.check_status(self.sample_img, "task_complete")
+            self.adb.check_status(self.sample_img, "task_complete")
         # print(self.sample_img)
         # print()
     @property

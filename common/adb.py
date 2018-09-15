@@ -4,15 +4,10 @@ import os
 import time
 from threading import Thread
 import imagehash
+from common.const import ADB_PATH, IMG_PATH
 
-import platform
-platform.system()
 
-# ADB_PATH = os.path.join(os.path.join(os.path.dirname((os.path.dirname(__file__))), "adb_exe"), "adb.exe")
-ADB_PATH = os.path.join(os.path.join(os.path.dirname((os.path.dirname(__file__))), "adb_exe"), "platform-tools/adb")
-IMG_PATH = os.path.join(os.path.dirname((os.path.dirname(__file__))), "img")
-
-class ADB():
+class ADB(object):
     def __init__(self, device):
         self.device = device
         self.screenshot_flag = False
@@ -56,40 +51,40 @@ class ADB():
             self.capture()
             time.sleep(1)
     
-    def crop(self, target_img, loc, find_screen_nm="screenshot.png"):
-        (x, y), (x1, y1) = loc
+    # def crop(self, target_img, loc, find_screen_nm="screenshot.png"):
+    #     (x, y), (x1, y1) = loc
+    #
+    #     # lock and wait
+    #     while self.screenshot_flag:
+    #         time.sleep(0.1)
+    #
+    #     screen_shot = cv2.imread(os.path.join(IMG_PATH, find_screen_nm))[y:y1, x:x1]
+    #     cv2.imwrite(os.path.join(IMG_PATH, 'tmp_%s.png' % target_img), screen_shot)
+    #     time.sleep(0.1)
+    #     return screen_shot
+    #
+    # def check_status(self, sample_img, target_img):
+    #     from PIL import Image
+    #
+    #     target_hash = imagehash.phash(Image.open(os.path.join(IMG_PATH, '%s.png' % target_img)))
+    #     self.crop(target_img, sample_img[target_img])
+    #
+    #     screen_shot_hash = imagehash.phash(Image.open(os.path.join(IMG_PATH,'tmp_%s.png' % target_img)))
+    #     point = target_hash - screen_shot_hash
+    #     print (point)
+    #     return 1 if point<=10 else 0
 
-        # lock and wait
-        while self.screenshot_flag:
-            time.sleep(0.1)
-
-        screen_shot = cv2.imread(os.path.join(IMG_PATH, find_screen_nm))[y:y1, x:x1]
-        cv2.imwrite(os.path.join(IMG_PATH, 'tmp_%s.png' % target_img), screen_shot)
-        time.sleep(0.1)
-        return screen_shot
-
-    def check_status(self, sample_img, target_img):
-        from PIL import Image
-
-        target_hash = imagehash.phash(Image.open(os.path.join(IMG_PATH, '%s.png' % target_img)))
-        self.crop(target_img, sample_img[target_img])
-
-        screen_shot_hash = imagehash.phash(Image.open(os.path.join(IMG_PATH,'tmp_%s.png' % target_img)))
-        point = target_hash - screen_shot_hash
-        print (point)
-        return 1 if point<=10 else 0
-
-import cv2
-def get_coordinates(target_nm, find_screen_nm="screenshot.png"):
-    target = cv2.imread(os.path.join(IMG_PATH, target_nm))
-    find_screen = cv2.imread(os.path.join(IMG_PATH, find_screen_nm))
-
-    result = cv2.matchTemplate(target, find_screen, cv2.TM_CCOEFF_NORMED)
-    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
-
-    find_height, find_width, find_channel = target.shape[::]
-
-    x = str(int(max_loc[0] + (find_width / 2)))
-    y = str(int(max_loc[1] + (find_height / 2)))
-    return x, y
+# import cv2
+# def get_coordinates(target_nm, find_screen_nm="screenshot.png"):
+#     target = cv2.imread(os.path.join(IMG_PATH, target_nm))
+#     find_screen = cv2.imread(os.path.join(IMG_PATH, find_screen_nm))
+#
+#     result = cv2.matchTemplate(target, find_screen, cv2.TM_CCOEFF_NORMED)
+#     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+#
+#     find_height, find_width, find_channel = target.shape[::]
+#
+#     x = str(int(max_loc[0] + (find_width / 2)))
+#     y = str(int(max_loc[1] + (find_height / 2)))
+#     return x, y
 
