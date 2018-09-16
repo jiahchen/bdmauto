@@ -23,6 +23,6 @@ conda env create -f mac_env.yml
 
 # install adb tools
 echo -e "${GREEN}Install adb tools package... ${NC}"
-unzip ./adb_exe/adb.zip -d ./adb_exe/platform-tools
+unzip ./adb_exe/adb.zip -d ./adb_exe/
 
 echo -e "${GREEN}Install Complete!"
