@@ -1,0 +1,36 @@
+name: game
+channels:
+  - menpo
+  - conda-forge
+  - defaults
+dependencies:
+  - bzip2=1.0.6=1
+  - ca-certificates=2018.8.24=ha4d7672_0
+  - certifi=2018.8.24=py35_1
+  - hdf5=1.8.20=1
+  - libffi=3.2.1=hfc679d8_5
+  - ncurses=6.1=hfc679d8_1
+  - openssl=1.0.2p=h470a237_0
+  - pip=18.0=py35_1
+  - python=3.5.5=h5001a0f_2
+  - readline=7.0=haf1bffa_1
+  - setuptools=40.2.0=py35_0
+  - sqlite=3.24.0=h2f33b56_1
+  - tk=8.6.8=0
+  - wheel=0.31.1=py35_1
+  - xz=5.2.4=h470a237_1
+  - zlib=1.2.11=h470a237_3
+  - libgfortran=3.0.1=h93005f0_2
+  - libopenblas=0.2.20=hdc02c5d_7
+  - numpy=1.14.3=py35he6379a5_1
+  - numpy-base=1.14.3=py35h7ef55bc_1
+  - opencv3=3.1.0=py35_0
+  - tbb=4.3_20141023=0
+  - pip:
+    - imagehash==4.0
+    - pillow==5.2.0
+    - pywavelets==1.0.0
+    - scipy==1.1.0
+    - six==1.11.0
+prefix: /Users/can/miniconda3/envs/game
+
