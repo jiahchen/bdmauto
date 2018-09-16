@@ -8,7 +8,9 @@ if __name__ == "__main__":
     adb_object.connect()
     # adb_object.touch(("222", "284"))
     adb_object.capture()
-
+    from maple_story.main_task import MainTask
+    task = MainTask(adb_object)
+    task.run()
 
 
 

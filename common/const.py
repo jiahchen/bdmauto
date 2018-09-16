@@ -9,4 +9,4 @@ if PLATFORM == "Darwin":
 elif PLATFORM == "Window":
     ADB_PATH = os.path.join(PROJECT_PATH, os.path.join("adb_exe", "adb.exe"))
 
-IMG_PATH = os.path.join(PROJECT_PATH, "img")
+IMG_PATH = os.path.join(PROJECT_PATH, "maple_story/img")
